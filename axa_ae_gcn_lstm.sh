@@ -4,11 +4,11 @@
 #PBS -l mem=10g
 #PBS -l walltime=1:00:00
 #PBS -N axa_ae_gcn
-#PBS -q stdq1 
+#PBS -q gpuq1 
 ###medq1, fatq1, gpuq1, stdq1 cgsd
 #PBS -e .GCNerr
 #PBS -o .GCNout
-#qsub run/AXA_AE_app/axa_ae_gcn_lstm.sh
+#qsub run/AXA_AE/axa_ae_gcn_lstm.sh
 
 module load python3 cuda11.0/toolkit/11.0.3 cudnn8.0-cuda11.0/8.0.5.39
 
@@ -16,13 +16,22 @@ module purge
 module add anaconda3
 module add parallel
 # source activate mypy3
-source activate mypy38
-# source activate myGPU
+# source activate mypy39
+source activate myGPU
 
-chmod +x run/AXA_AE_app/axa_ae_gcn_lstm.py
+chmod +x run/AXA_AE/axa_ae_gcn_lstm_v0.1.py
 # chmod +x run/AXA_AE_app/axa_ae_gcn_lstm.py
 
-python run/AXA_AE_app/axa_ae_gcn_lstm.py
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -f 1
+python run/AXA_AE/axa_ae_gcn_lstm_v0.1.py -i run/AXA_AE/ -t 7 -c 10 -f 1
+python run/AXA_AE/axa_ae_gcn_lstm_v0.1.py -i run/AXA_AE/ -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -t 10 -c 10 -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -t 7 -c 15 -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -t 10 -c 15 -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -t 7 -c 5 -f 1
+# python run/AXA_AE/axa_ae_gcn_lstm.py -i run/AXA_AE/ -t 10 -c 5 -f 1
 # python run/AXA_AE_app/axa_ae_gcn_lstm.py
 
 
